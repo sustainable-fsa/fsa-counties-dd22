@@ -1,0 +1,9 @@
+title: FSA_Counties_dd22_NonGeneralized Geodatabase Archive
+description: An archival copy and simplified version of the USDA Farm Service Agency dd22 non-generalized county boundaries dataset.
+author: R. Kyle Bocinsky
+url: "https://sustainable-fsa.com/fsa-counties-dd22/" # Your GitHub Pages URL
+baseurl: "/fsa-counties-dd22"
+
+remote_theme: jekyll/minima
+plugins:
+  - jekyll-remote-theme
