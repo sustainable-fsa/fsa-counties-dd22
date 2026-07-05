@@ -24,9 +24,9 @@ and mapping purposes. Unlike the dd17 schema, this is the
 **non-generalized** version, containing full-resolution county boundary
 geometries.
 
-- [`FSA_Counties_dd22_NonGeneralized.gdb.zip`](https://sustainable-fsa.com/fsa-counties-dd22/FSA_Counties_dd22_NonGeneralized.gdb.zip)
+- [`FSA_Counties_dd22_NonGeneralized.gdb.zip`](https://data.sustainable-fsa.com/fsa-counties-dd22/FSA_Counties_dd22_NonGeneralized.gdb.zip)
   – Original USDA File Geodatabase
-- [`fsa-counties-dd22.topojson`](https://sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.topojson)
+- [`fsa-counties-dd22.topojson`](https://data.sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.topojson)
   – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico
   (see below)
 - [`fsa-counties-dd22.R`](https://sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.R)
@@ -167,7 +167,7 @@ library(rmapshaper) # For innerlines function
 
 ## Download the FSA_Counties_dd22 archive
 counties <-
-  sf::read_sf("https://sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.topojson",
+  sf::read_sf("https://data.sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.topojson",
               layer = "counties") |>
   sf::st_set_crs("EPSG:4326") |>
   sf::st_transform("EPSG:5070")
@@ -220,11 +220,21 @@ conservation.
 
 If you use this data in published work, please cite:
 
-> USDA Farm Service Agency. *FSA_Counties_dd22_NonGeneralized Geospatial Dataset*. Obtained under FOIA request 2026-FSA-03465-F; curated and archived by R. Kyle Bocinsky, Montana Climate Office, University of Montana. Sustainable FSA project. Accessed YYYY-MM-DD. <https://sustainable-fsa.com/fsa-counties-dd22/>
+> USDA Farm Service Agency. *FSA_Counties_dd22_NonGeneralized Geospatial
+> Dataset*. Obtained under FOIA request 2026-FSA-03465-F; curated and
+> archived by R. Kyle Bocinsky, Montana Climate Office, University of
+> Montana. Sustainable FSA project. Accessed YYYY-MM-DD.
+> <https://sustainable-fsa.com/fsa-counties-dd22/>
 
-Machine-readable metadata are in [`CITATION.cff`](CITATION.cff); GitHub's **Cite this repository** button (top right of the repo page) renders it as APA or BibTeX.
+Machine-readable metadata are in [`CITATION.cff`](CITATION.cff);
+GitHub’s **Cite this repository** button (top right of the repo page)
+renders it as APA or BibTeX.
 
-**Acknowledgment**: This work is part of the [*Enhancing Sustainable Disaster Relief in FSA Programs*](https://www.ars.usda.gov/research/project/?accnNo=444612) project, supported by the USDA Office of the Chief Economist, Office of Energy and Environmental Policy, and the USDA Climate Hubs.
+**Acknowledgment**: This work is part of the [*Enhancing Sustainable
+Disaster Relief in FSA
+Programs*](https://www.ars.usda.gov/research/project/?accnNo=444612)
+project, supported by the USDA Office of the Chief Economist, Office of
+Energy and Environmental Policy, and the USDA Climate Hubs.
 
 ## 📄 License
 
