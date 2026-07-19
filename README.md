@@ -229,6 +229,8 @@ If you use this data in published work, please cite:
 > archived by R. Kyle Bocinsky, Montana Climate Office, University of
 > Montana. Sustainable FSA project. Accessed YYYY-MM-DD.
 > <https://sustainable-fsa.com/fsa-counties-dd22/>
+>
+> DOI: <https://doi.org/10.5281/zenodo.21443221>
 
 Machine-readable metadata are in [`CITATION.cff`](CITATION.cff);
 GitHub’s **Cite this repository** button (top right of the repo page)
