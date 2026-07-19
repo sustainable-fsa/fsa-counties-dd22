@@ -1,4 +1,8 @@
 
+[![GitHub
+Release](https://img.shields.io/github/v/release/sustainable-fsa/fsa-counties-dd22?label=GitHub%20Release&color=%239c27b0)](https://github.com/sustainable-fsa/fsa-counties-dd22)
+[![DOI](https://zenodo.org/badge/1224957869.svg)](https://zenodo.org/badge/latestdoi/1224957869)
+
 This repository contains an archival copy of the
 **FSA_Counties_dd22_NonGeneralized** dataset, originally distributed by
 the U.S. Department of Agriculture (USDA) Farm Service Agency (FSA) as
