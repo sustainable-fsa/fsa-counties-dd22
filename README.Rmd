@@ -26,11 +26,19 @@ The zipped geodatabase includes polygon features representing U.S. counties, att
 
 -   [`FSA_Counties_dd22_NonGeneralized.gdb.zip`](https://data.sustainable-fsa.com/fsa-counties-dd22/FSA_Counties_dd22_NonGeneralized.gdb.zip) – Original USDA File Geodatabase
 -   [`fsa-counties-dd22.topojson`](https://data.sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.topojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
+-   [`fsa-counties-dd22.parquet`](https://data.sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.parquet) – Parquet version of the full (non-simplified) geodatabase
 -   [`fsa-counties-dd22.R`](https://sustainable-fsa.com/fsa-counties-dd22/fsa-counties-dd22.R) – R script that produces the Simplified TopoJSON versions
+-   [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd22/_manifest.txt) – flat index of every file in the S3-hosted mirror
 
 ## 📋 FOIA Provenance
 
 The `FSA_Counties_dd22_NonGeneralized` geodatabase was obtained through FOIA request **2026-FSA-03465-F**, submitted by R. Kyle Bocinsky (Montana Climate Office, University of Montana) on March 18, 2026. The complete FOIA correspondence and related materials are archived in [`foia/2026-FSA-03465-F Bocinsky.zip`](foia/2026-FSA-03465-F%20Bocinsky.zip).
+
+## ☁️ Archive Hosting & Automated Publishing
+
+This repository dual-writes its archive: the geodatabase, TopoJSON, Parquet, and FOIA correspondence are all committed to git *and* mirrored to S3, served via CloudFront at <https://data.sustainable-fsa.com/fsa-counties-dd22/> (browse the [archive listing](https://data.sustainable-fsa.com/fsa-counties-dd22/) or [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd22/_manifest.txt) for a flat index).
+
+Publishing is handled by [`fsa-counties-dd22.R`](fsa-counties-dd22.R) via the shared [`R/s3-archive.R`](R/s3-archive.R) helpers, and runs automatically in GitHub Actions ([`.github/workflows/fsa-counties-dd22.yaml`](.github/workflows/fsa-counties-dd22.yaml)) whenever the script or workflow changes, or on manual dispatch. The workflow authenticates to AWS via GitHub OIDC (no long-lived credentials stored in the repo), re-renders this README, and commits it back to git only if the rendered output changed.
 
 ## 🧾 Field Descriptions
 
