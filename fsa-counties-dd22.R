@@ -126,10 +126,10 @@ system(
 mapshaper \\
   fsa-counties-dd22.geojson \\
   -clean rewind \\
-  -rename-layers counties,states \\
+  -rename-layers counties \\
   -dissolve field=state copy-fields='id' + name=states \\
   -each 'id=id.slice(0,2)' target=states \\
-  -rename-layers counties,states \\
+  -rename-layers counties,states target=counties,states \\
   -o format=topojson quantization=1e5 fix-geometry id-field='id' bbox target=* fsa-counties-dd22.topojson
 "
 )
