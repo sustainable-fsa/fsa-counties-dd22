@@ -14,6 +14,19 @@ library(tigris)
 library(rmapshaper)
 
 ## The FSA county definitions
+counties <-
+  sf::read_sf("/vsizip/FSA_Counties_dd22_NonGeneralized.gdb.zip")
+
+## Create a parquet version
+counties |>
+  sf::write_sf(
+    "fsa-counties-dd22.parquet",
+    driver = "Parquet",
+    layer_options = c("COMPRESSION=ZSTD",
+                      "COMPRESSION_LEVEL=13"),
+    delete_dsn = TRUE
+  )
+
 ## Create a simplified version
 counties <-
   sf::read_sf("/vsizip/FSA_Counties_dd22_NonGeneralized.gdb.zip") %>%
@@ -38,7 +51,7 @@ counties <-
   rmapshaper::ms_clip(
     clip =
       tigris::counties(cb = TRUE,
-                     resolution = "5m") %>%
+                       resolution = "5m") %>%
       sf::st_transform("WGS84") %>%
       rmapshaper::ms_explode(sys = TRUE,
                              sys_mem = 16) %>%
@@ -47,7 +60,7 @@ counties <-
     remove_slivers = TRUE,
     sys = TRUE,
     sys_mem = 16
-    ) %>%
+  ) %>%
   sf::st_make_valid() %>%
   rmapshaper::ms_explode(sys = TRUE,
                          sys_mem = 16) %>%
