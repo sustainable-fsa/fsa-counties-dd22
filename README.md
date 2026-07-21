@@ -51,22 +51,22 @@ complete FOIA correspondence and related materials are archived in
 ## ☁️ Archive Hosting & Automated Publishing
 
 This repository dual-writes its archive: the geodatabase, TopoJSON,
-Parquet, and FOIA correspondence are all committed to git *and*
-mirrored to S3, served via CloudFront at
+Parquet, and FOIA correspondence are all committed to git *and* mirrored
+to S3, served via CloudFront at
 <https://data.sustainable-fsa.com/fsa-counties-dd22/> (browse the
 [archive listing](https://data.sustainable-fsa.com/fsa-counties-dd22/)
-or [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd22/_manifest.txt)
+or
+[`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd22/_manifest.txt)
 for a flat index).
 
-Publishing is handled by
-[`fsa-counties-dd22.R`](fsa-counties-dd22.R) via the shared
-[`R/s3-archive.R`](R/s3-archive.R) helpers, and runs automatically in
-GitHub Actions
+Publishing is handled by [`fsa-counties-dd22.R`](fsa-counties-dd22.R)
+via the shared [`R/s3-archive.R`](R/s3-archive.R) helpers, and runs
+automatically in GitHub Actions
 ([`.github/workflows/fsa-counties-dd22.yaml`](.github/workflows/fsa-counties-dd22.yaml))
 whenever the script or workflow changes, or on manual dispatch. The
-workflow authenticates to AWS via GitHub OIDC (no long-lived
-credentials stored in the repo), re-renders this README, and commits
-it back to git only if the rendered output changed.
+workflow authenticates to AWS via GitHub OIDC (no long-lived credentials
+stored in the repo), re-renders this README, and commits it back to git
+only if the rendered output changed.
 
 ## 🧾 Field Descriptions
 
