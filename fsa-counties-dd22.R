@@ -32,6 +32,9 @@ counties <-
     sf::read_sf(tmp)
   } %>%
   sf::st_transform("WGS84") %>%
+  dplyr::group_by(id) %>%
+  dplyr::summarise() %>%
+  sf::st_cast("MULTIPOLYGON") %>%
   rmapshaper::ms_explode(sys = TRUE,
                          sys_mem = 16) %>%
   rmapshaper::ms_dissolve(field = "id",
@@ -53,14 +56,30 @@ counties <-
                           sys = TRUE,
                           sys_mem = 16) %>%
   sf::st_cast("MULTIPOLYGON") %>%
-  dplyr::arrange(id) %>%
+  dplyr::arrange(id)
+
+## Drop holes
+unlink("fsa-counties-dd22.geojson")
+counties %>%
+  sf::write_sf("fsa-counties-dd22.geojson",
+               delete_dsn = TRUE)
+
+out <- rmapshaper::apply_mapshaper_commands("fsa-counties-dd22.geojson", 
+                                            command = "-clean gap-fill-area=0 -drop holes",
+                                            sys = TRUE,
+                                            sys_mem = 16)
+counties <- 
+  sf::read_sf(out) %>%
   dplyr::left_join(
     sf::read_sf("/vsizip/FSA_Counties_dd22_NonGeneralized.gdb.zip") %>%
       sf::st_drop_geometry() %>%
       dplyr::mutate(id = FSA_STCOU) %>%
-      dplyr::distinct()
+      dplyr::arrange(id) %>%
+      dplyr::distinct(id, .keep_all = TRUE)
   ) %>%
   dplyr::select((!id))
+
+unlink("fsa-counties-dd22.geojson")
 
 ## Create a parquet version
 counties |>
@@ -77,6 +96,7 @@ counties %>%
   dplyr::filter(!(FIPSST %in% c("60", "78", "14", "52", "69", "66"))) %>%
   dplyr::select(id = FSA_STCOU) %>%
   rmapshaper::ms_simplify(keep = 0.008,
+                          keep_shapes = TRUE,
                           sys = TRUE,
                           sys_mem = 16) %>%
   rmapshaper::ms_clip(
@@ -88,7 +108,7 @@ counties %>%
                              sys_mem = 16) %>%
       rmapshaper::ms_dissolve(sys = TRUE,
                               sys_mem = 16),
-    remove_slivers = TRUE,
+    remove_slivers = FALSE,
     sys = TRUE,
     sys_mem = 16
   ) %>%
