@@ -183,7 +183,12 @@ s3_put(bucket = s3_bucket,
 
 s3_put(bucket = s3_bucket,
        key = paste0(s3_prefix, "/fsa-counties-dd22.topojson"),
-       file = "fsa-counties-dd22.topojson")
+       file = "fsa-counties-dd22.topojson",
+       ## TopoJSON is JSON. Without this, s3_put() falls back to
+       ## application/octet-stream, which CloudFront will not compress: the CDN
+       ## copy went out at 1,355,656 bytes where the gzipped GitHub Pages copy
+       ## of the same file is 451,897.
+       content_type = "application/json")
 
 s3_put(bucket = s3_bucket,
        key = paste0(s3_prefix, "/fsa-counties-dd22.parquet"),
